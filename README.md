@@ -1,5 +1,7 @@
 # v-runtime-template
 
+[![npm](https://img.shields.io/npm/v/v-runtime-template.svg)](https://www.npmjs.com/package/v-runtime-template)
+
 A Vue.js components that makes easy compiling and interpreting a Vue.js template at runtime. Does this sound confusing? See the _[Why v-runtime-template?](#why-v-runtime-template)_ section.
 
 **[See Demo on CodeSandbox](https://codesandbox.io/s/884v9kq790)**
@@ -103,17 +105,17 @@ export default {
 
 Most of times we can precompile all our components and structure at build time.
 
-Sometimes, we might get HTML at runtime (for example, coming from an API). For those cases the `[v-html]()` directive works really well.
+Sometimes, you might need to get HTML at runtime (for example, coming from an API). For those cases the `[v-html](https://vuejs.org/v2/api/#v-html)` directive works really well.
 
-But, if we need to get Vue.js template code at runtime (again, for example from a server), if you use `v-html` the specific Vue code will not be interpreted. This is where `v-runtime-template` comes into play.
+But, if you need to get Vue template code at runtime, using `v-html` for specific template Vue code will not be interpreted. This is where `v-runtime-template` comes into play.
 
 Some cases you need to do that:
 
 * In front offices or store fronts, where you allow the user to enter data that later you transform into Vue specific code.
-* In WYSIWYG visual editors. As a user, think of an interface where you drag and drop components to build something visual.
-* Basically, anything coming from a user that can contain Vue code
+* In WYSIWYG visual editors. As a user, think of an interface where you drag and drop components to build something visual. That gets stored as Vue template code in the database and you eventually will receive it in the frontend.
+* Basically, anything coming from a user that can contain Vue code.
 
-To get an example, this would work with `v-html`:
+Let's see an example: this would work with `v-html`:
 
 ```html
 <template>
