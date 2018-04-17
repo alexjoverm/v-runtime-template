@@ -59,8 +59,8 @@ export default {
   data: () => ({
     name: "Mellow",
     template: `
-				<app-message>Hello {{ name }}!</app-message>
-			`
+      <app-message>Hello {{ name }}!</app-message>
+    `
   }),
   components: {
     AppMessage,
