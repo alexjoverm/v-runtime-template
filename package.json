@@ -1,0 +1,35 @@
+{
+  "name": "v-runtime-template",
+  "version": "0.0.1",
+  "description": "Create Vue components by compiling templates on the fly",
+  "main": "dist/v-runtime-template.cjs.js",
+  "scripts": {
+    "build": "rollit index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexjoverm/v-runtime-template.git"
+  },
+  "keywords": [
+    "vuejs",
+    "dynamic",
+    "runtime",
+    "template"
+  ],
+  "author": {
+    "name": "Alex J",
+    "email": "alexjovermorales@gmail.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "rollit": "0.0.8"
+  },
+  "bugs": {
+    "url": "https://github.com/alexjoverm/v-runtime-template/issues"
+  },
+  "homepage": "https://github.com/alexjoverm/v-runtime-template#readme",
+  "module": "dist/v-runtime-template.es.js",
+  "unpkg": "dist/v-runtime-template.js",
+  "browser": "dist/v-runtime-template.es.js"
+}
