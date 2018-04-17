@@ -1,6 +1,6 @@
 {
   "name": "v-runtime-template",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Create Vue components by compiling templates on the fly",
   "main": "dist/v-runtime-template.cjs.js",
   "scripts": {
