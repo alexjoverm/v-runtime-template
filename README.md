@@ -6,6 +6,8 @@ A Vue.js components that makes easy compiling and interpreting a Vue.js template
 
 **[See Demo on CodeSandbox](https://codesandbox.io/s/884v9kq790)**
 
+## Motivation
+
 ## Getting Started
 
 Install it:
