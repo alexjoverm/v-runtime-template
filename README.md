@@ -2,11 +2,17 @@
 
 [![npm](https://img.shields.io/npm/v/v-runtime-template.svg)](https://www.npmjs.com/package/v-runtime-template)
 
-A Vue.js components that makes easy compiling and interpreting a Vue.js template at runtime. Does this sound confusing? See the _[Why v-runtime-template?](#why-v-runtime-template)_ section.
+A Vue.js components that makes easy compiling and interpreting a Vue.js template at runtime by using a `v-html` like API.
 
 **[See Demo on CodeSandbox](https://codesandbox.io/s/884v9kq790)**
 
 ## Motivation
+
+This library solves the case where you get a vue-syntax template string on runtime, usually from a server. Think of a feature where you allow the user to create their own interfaces and structures. You save that as a vue template in your database, which your UI will request later. While components are pre-compiled at build time, this case isn't (since the template is received at runtime) and needs to be compiled at runtime.
+
+v-runtime-template compiles that template and attaches it to the scope of the component that uses it, so it has access to its data, props, methods and computed properties.
+
+Think of it as the `v-html` equivalent that also understands vue template syntax (v-html is just for plain HTML).
 
 ## Getting Started
 
@@ -103,21 +109,13 @@ export default {
 };
 ```
 
-## Why v-runtime-template
+## Comparison
 
-Most of times we can precompile all our components and structure at build time.
+### v-runtime-template VS v-html
 
-Sometimes, you might need to get HTML at runtime (for example, coming from an API). For those cases the `[v-html](https://vuejs.org/v2/api/#v-html)` directive works really well.
+_TL;DR: If you need to interpret only HTML, use `v-html`. Use this library otherwise._
 
-But, if you need to get Vue template code at runtime, using `v-html` for specific template Vue code will not be interpreted. This is where `v-runtime-template` comes into play.
-
-Some cases you need to do that:
-
-* In front offices or store fronts, where you allow the user to enter data that later you transform into Vue specific code.
-* In WYSIWYG visual editors. As a user, think of an interface where you drag and drop components to build something visual. That gets stored as Vue template code in the database and you eventually will receive it in the frontend.
-* Basically, anything coming from a user that can contain Vue code.
-
-Let's see an example: this would work with `v-html`:
+They both have the same goal: to interpret and attach a piece of structure to a scope at runtime. The difference is, `[v-html](https://vuejs.org/v2/api/#v-html)` doesn't understand vue template syntax, but only HTML. So, while this code works:
 
 ```html
 <template>
@@ -132,7 +130,13 @@ export default {
     `
 ```
 
-But the following example doesn't, since we're using a custom component. For that we need `v-runtime-template`:
+the following wouldn't since it uses the custom `router-link` component:
+
+```html
+<router-link to="mike-page">Go to Mike page</router-link>
+```
+
+But you can use v-runtime-template, which uses basically the same API than v-html:
 
 ```html
 <template>
@@ -146,3 +150,9 @@ export default {
       <router-link to="mike-page">Go to Mike page</router-link>
     `
 ```
+
+### v-runtime-template VS dynamic components (<component>)
+
+Dynamic components have somewhat different goal: to render a component dynamically by binding it to the `is` prop. Although, these components are usually pre-compiled. However, the goal of v-runtime-template can be achieved just by using the component options object form of dynamic components.
+
+In fact, v-runtime-template uses that under the hood (in the render function form) along with other common tasks to achieve its goal.
