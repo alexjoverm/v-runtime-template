@@ -151,7 +151,7 @@ export default {
     `
 ```
 
-### v-runtime-template VS dynamic components (<component>)
+### v-runtime-template VS dynamic components (`<component>`)
 
 Dynamic components have somewhat different goal: to render a component dynamically by binding it to the `is` prop. Although, these components are usually pre-compiled. However, the goal of v-runtime-template can be achieved just by using the component options object form of dynamic components.
 
