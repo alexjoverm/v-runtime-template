@@ -4,6 +4,7 @@
   "description": "Create Vue components by compiling templates on the fly",
   "main": "dist/v-runtime-template.cjs.js",
   "scripts": {
+    "prepublishOnly": "npm run build",
     "build": "rollit index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
