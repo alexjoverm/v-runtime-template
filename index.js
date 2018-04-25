@@ -13,9 +13,10 @@ const defineDescriptor = (src, dest, name) => {
 const merge = objs => {
   const res = {};
   objs.forEach(obj => {
-    Object.getOwnPropertyNames(obj).forEach(name =>
-      defineDescriptor(obj, res, name),
-    );
+    obj &&
+      Object.getOwnPropertyNames(obj).forEach(name =>
+        defineDescriptor(obj, res, name),
+      );
   });
   return res;
 };

@@ -1,38 +1,59 @@
 /**
- * v-runtime-template v1.0.0
+ * v-runtime-template v1.4.0
  * (c) 2018 Alex J <alexjovermorales@gmail.com>
  * @license MIT
  */
 
 'use strict';
 
+var getKeysFromOptions = function (options) { return Object.keys(options.data() || {}).concat( Object.keys(options.props || {}) ); };
+
+var defineDescriptor = function (src, dest, name) {
+  if (!dest.hasOwnProperty(name)) {
+    var descriptor = Object.getOwnPropertyDescriptor(src, name);
+    Object.defineProperty(dest, name, descriptor);
+  }
+};
+
+var merge = function (objs) {
+  var res = {};
+  objs.forEach(function (obj) {
+    obj &&
+      Object.getOwnPropertyNames(obj).forEach(function (name) { return defineDescriptor(obj, res, name); }
+      );
+  });
+  return res;
+};
+
+var buildFromProps = function (obj, props) {
+  var res = {};
+  props.forEach(function (prop) { return defineDescriptor(obj, res, prop); });
+  return res;
+};
+
 var index = {
   props: {
     template: String,
   },
-  computed: {
-    dynamic: function dynamic() {
-      var ref = this.$parent.$options;
-      var props = ref.props;
-      var data = ref.data;
-      var methods = ref.methods;
-      var computed = ref.computed;
-      var components = ref.components;
-      var watch = ref.watch;
-
-      return {
-        template: this.template,
-        props: props,
-        data: data,
-        methods: methods,
-        computed: computed,
-        components: components,
-        watch: watch,
-      };
-    },
-  },
   render: function render(h) {
-    return h(this.dynamic);
+    var ref = this.$parent;
+    var $data = ref.$data;
+    var $props = ref.$props;
+    var $options = ref.$options;
+
+    var methodKeys = Object.keys($options.methods || {});
+    var allKeys = getKeysFromOptions($options).concat(methodKeys);
+    var methods = buildFromProps(this.$parent, methodKeys);
+    var props = merge([$data, $props, methods]);
+
+    var dynamic = {
+      template: this.template,
+      props: allKeys,
+      computed: $options.computed,
+      components: $options.components,
+    };
+
+    return h(dynamic, { props: props });
   },
 };
 
