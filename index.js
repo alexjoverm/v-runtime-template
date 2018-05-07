@@ -1,5 +1,5 @@
 const getKeysFromOptions = options => [
-  ...Object.keys(options.data() || {}),
+  ...Object.keys((options.data && options.data()) || {}),
   ...Object.keys(options.props || {}),
 ];
 
@@ -32,7 +32,11 @@ export default {
     template: String,
   },
   render(h) {
-    const { $data, $props, $options } = this.$parent;
+    const {
+      $data,
+      $props,
+      $options
+    } = this.$parent;
 
     const methodKeys = Object.keys($options.methods || {});
     const allKeys = getKeysFromOptions($options).concat(methodKeys);
@@ -46,6 +50,8 @@ export default {
       components: $options.components,
     };
 
-    return h(dynamic, { props });
+    return h(dynamic, {
+      props
+    });
   },
 };
