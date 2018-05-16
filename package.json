@@ -24,6 +24,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "hoek": "^5.0.3",
     "rollit": "0.0.8"
   },
   "bugs": {
