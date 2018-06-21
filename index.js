@@ -1,6 +1,6 @@
 const getKeysFromOptions = options => [
   ...Object.keys((options.data && options.data()) || {}),
-  ...Object.keys(options.props || {}),
+  ...Object.keys(options.props || {})
 ];
 
 const defineDescriptor = (src, dest, name) => {
@@ -15,7 +15,7 @@ const merge = objs => {
   objs.forEach(obj => {
     obj &&
       Object.getOwnPropertyNames(obj).forEach(name =>
-        defineDescriptor(obj, res, name),
+        defineDescriptor(obj, res, name)
       );
   });
   return res;
@@ -29,29 +29,27 @@ const buildFromProps = (obj, props) => {
 
 export default {
   props: {
-    template: String,
+    template: String
   },
   render(h) {
-    const {
-      $data,
-      $props,
-      $options
-    } = this.$parent;
+    if (this.template) {
+      const { $data, $props, $options } = this.$parent;
 
-    const methodKeys = Object.keys($options.methods || {});
-    const allKeys = getKeysFromOptions($options).concat(methodKeys);
-    const methods = buildFromProps(this.$parent, methodKeys);
-    const props = merge([$data, $props, methods]);
+      const methodKeys = Object.keys($options.methods || {});
+      const allKeys = getKeysFromOptions($options).concat(methodKeys);
+      const methods = buildFromProps(this.$parent, methodKeys);
+      const props = merge([$data, $props, methods]);
 
-    const dynamic = {
-      template: this.template,
-      props: allKeys,
-      computed: $options.computed,
-      components: $options.components,
-    };
+      const dynamic = {
+        template: this.template || "<div></div>",
+        props: allKeys,
+        computed: $options.computed,
+        components: $options.components
+      };
 
-    return h(dynamic, {
-      props
-    });
-  },
+      return h(dynamic, {
+        props
+      });
+    }
+  }
 };
