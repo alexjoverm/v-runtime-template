@@ -62,7 +62,7 @@ You just need to import the `v-runtime-template` component, and pass the templat
 </template>
 
 <script>
-import VRuntimeTemplate from "./v-runtime-template";
+import VRuntimeTemplate from "v-runtime-template";
 import AppMessage from "./AppMessage";
 
 export default {
