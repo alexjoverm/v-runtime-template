@@ -12,7 +12,7 @@ This library solves the case where you get a vue-syntax template string on runti
 
 v-runtime-template compiles that template and attaches it to the scope of the component that uses it, so it has access to its data, props, methods and computed properties.
 
-Think of it as the `v-html` equivalent that also understands vue template syntax (v-html is just for plain HTML).
+Think of it as the `v-html` equivalent that also understands vue template syntax (while `v-html` is just for plain HTML).
 
 ## Getting Started
 
