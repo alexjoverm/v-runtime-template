@@ -109,6 +109,10 @@ export default {
 };
 ```
 
+## Limitations
+
+Keep in mind that the template can only access the instance properties of the component who is using it. Read [this issue](https://github.com/alexjoverm/v-runtime-template/issues/9) for more information.
+
 ## Comparison
 
 ### v-runtime-template VS v-html
