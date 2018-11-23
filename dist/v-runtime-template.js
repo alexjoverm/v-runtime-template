@@ -56,7 +56,8 @@ var index = {
         template: this.template || "<div></div>",
         props: allKeys,
         computed: $options.computed,
-        components: $options.components
+        components: $options.components,
+	filters: this.$root.$options.filters
       };
 
       return h(dynamic, {
