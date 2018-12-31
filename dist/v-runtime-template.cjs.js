@@ -1,13 +1,10 @@
 /**
- * v-runtime-template v1.5.1
+ * v-runtime-template v1.5.3
  * (c) 2018 Alex J <alexjovermorales@gmail.com>
  * @license MIT
  */
 
 'use strict';
-
-var getKeysFromOptions = function (options) { return Object.keys((options.data && options.data()) || {}).concat( Object.keys(options.props || {})
-); };
 
 var defineDescriptor = function (src, dest, name) {
   if (!dest.hasOwnProperty(name)) {
@@ -37,22 +34,38 @@ var index = {
     template: String
   },
   render: function render(h) {
+    var this$1 = this;
+
     if (this.template) {
       var ref = this.$parent;
       var $data = ref.$data;
       var $props = ref.$props;
       var $options = ref.$options;
+      var components = $options.components;
+      var computed = $options.computed;
+      var methods = $options.methods;
 
-      var methodKeys = Object.keys($options.methods || {});
-      var allKeys = getKeysFromOptions($options).concat(methodKeys);
-      var methods = buildFromProps(this.$parent, methodKeys);
-      var props = merge([$data, $props, methods]);
+      var passthrough = {$data:{}, $props:{}, $options:{}, components:{}, computed:{}, methods:{}};
+
+      //build new objects by removing keys if already exists (e.g. created by mixins)
+      Object.keys($data).forEach(function (e) {if(typeof this$1.$data[e]==="undefined") { passthrough.$data[e] = $data[e]; }} );
+      Object.keys($props).forEach(function (e) {if(typeof this$1.$props[e]==="undefined") { passthrough.$props[e] = $props[e]; }} );
+      Object.keys(methods).forEach(function (e) {if(typeof this$1.$options.methods[e]==="undefined") { passthrough.methods[e] = methods[e]; }} );
+      Object.keys(computed).forEach(function (e) {if(typeof this$1.$options.computed[e]==="undefined") { passthrough.computed[e] = computed[e]; }} );
+      Object.keys(components).forEach(function (e) {if(typeof this$1.$options.components[e]==="undefined") { passthrough.components[e] = components[e]; }} );
+
+      var methodKeys = Object.keys(passthrough.methods || {});
+      var dataKeys = Object.keys(passthrough.$data || {});
+      var propKeys = Object.keys(passthrough.$props || {});
+      var allKeys = dataKeys.concat(propKeys).concat(methodKeys);
+      var methodsFromProps = buildFromProps(this.$parent, methodKeys);
+      var props = merge([passthrough.$data, passthrough.$props, methodsFromProps]);
 
       var dynamic = {
         template: this.template || "<div></div>",
         props: allKeys,
-        computed: $options.computed,
-        components: $options.components
+        computed: passthrough.computed,
+        components: passthrough.components
       };
 
       return h(dynamic, {
