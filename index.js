@@ -24,7 +24,13 @@ const buildFromProps = (obj, props) => {
 
 export default {
   props: {
-    template: String
+    template: String,
+    templateProps: {
+      type: Object,
+      default: function () {
+        return {}
+      }
+    }
   },
   render(h) {
     if (this.template) {
@@ -34,18 +40,19 @@ export default {
       let passthrough = {$data:{}, $props:{}, $options:{}, components:{}, computed:{}, methods:{}};
 
       //build new objects by removing keys if already exists (e.g. created by mixins)
-      Object.keys($data).forEach(e => {if(typeof this.$data[e]==="undefined") passthrough.$data[e] = $data[e];} );
-      Object.keys($props).forEach(e => {if(typeof this.$props[e]==="undefined") passthrough.$props[e] = $props[e];} );
-      Object.keys(methods).forEach(e => {if(typeof this.$options.methods[e]==="undefined") passthrough.methods[e] = methods[e];} );
-      Object.keys(computed).forEach(e => {if(typeof this.$options.computed[e]==="undefined") passthrough.computed[e] = computed[e];} );
-      Object.keys(components).forEach(e => {if(typeof this.$options.components[e]==="undefined") passthrough.components[e] = components[e];} );
+      Object.keys($data || {}).forEach(e => {if(typeof this.$data[e]==="undefined") passthrough.$data[e] = $data[e];} );
+      Object.keys($props || {}).forEach(e => {if(typeof this.$props[e]==="undefined") passthrough.$props[e] = $props[e];} );
+      Object.keys(methods || {}).forEach(e => {if(typeof this.$options.methods[e]==="undefined") passthrough.methods[e] = methods[e];} );
+      Object.keys(computed || {}).forEach(e => {if(typeof this.$options.computed[e]==="undefined") passthrough.computed[e] = computed[e];} );
+      Object.keys(components|| {}).forEach(e => {if(typeof this.$options.components[e]==="undefined") passthrough.components[e] = components[e];} );
 
       const methodKeys = Object.keys(passthrough.methods || {});
       const dataKeys = Object.keys(passthrough.$data || {});
       const propKeys = Object.keys(passthrough.$props || {});
-      const allKeys = dataKeys.concat(propKeys).concat(methodKeys);
+      const templatePropKeys = Object.keys(this.templateProps || {});
+      const allKeys = dataKeys.concat(propKeys).concat(methodKeys).concat(templatePropKeys);
       const methodsFromProps = buildFromProps(this.$parent, methodKeys);
-      const props = merge([passthrough.$data, passthrough.$props, methodsFromProps]);
+      const props = merge([passthrough.$data, passthrough.$props, methodsFromProps, this.templateProps]);
 
       const dynamic = {
         template: this.template || "<div></div>",
