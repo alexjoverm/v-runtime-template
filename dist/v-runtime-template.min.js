@@ -1,5 +1,5 @@
 /**
- * v-runtime-template v1.5.3
+ * v-runtime-template v1.6.0
  * (c) 2018 Alex J <alexjovermorales@gmail.com>
  * @license MIT
  */
