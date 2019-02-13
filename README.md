@@ -31,13 +31,7 @@ For example, if you use the [Vue CLI](https://github.com/vuejs/vue-cli), create 
 ```js
 // vue.config.js
 module.exports = {
-  configureWebpack: {
-    resolve: {
-      alias: {
-        vue$: "vue/dist/vue.common",
-      },
-    },
-  },
+  runtimeCompiler: true
 };
 ```
 
