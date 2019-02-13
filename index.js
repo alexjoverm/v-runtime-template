@@ -28,8 +28,8 @@ export default {
   },
   render(h) {
     if (this.template) {
-      const { $data, $props, $options } = this.$parent;
-      const { components, computed, methods } = $options;
+      const { $data = {}, $props = {}, $options = {} } = this.$parent;
+      const { components = {}, computed = {}, methods = {} } = $options;
 
       let passthrough = {$data:{}, $props:{}, $options:{}, components:{}, computed:{}, methods:{}};
 
