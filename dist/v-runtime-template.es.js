@@ -1,6 +1,6 @@
 /**
- * v-runtime-template v1.6.0
- * (c) 2018 Alex J <alexjovermorales@gmail.com>
+ * v-runtime-template v1.6.2
+ * (c) 2019 Alex J <alexjovermorales@gmail.com>
  * @license MIT
  */
 
@@ -36,21 +36,21 @@ var index = {
 
     if (this.template) {
       var ref = this.$parent;
-      var $data = ref.$data;
-      var $props = ref.$props;
-      var $options = ref.$options;
-      var components = $options.components;
-      var computed = $options.computed;
-      var methods = $options.methods;
+      var $data = ref.$data; if ( $data === void 0 ) $data = {};
+      var $props = ref.$props; if ( $props === void 0 ) $props = {};
+      var $options = ref.$options; if ( $options === void 0 ) $options = {};
+      var components = $options.components; if ( components === void 0 ) components = {};
+      var computed = $options.computed; if ( computed === void 0 ) computed = {};
+      var methods = $options.methods; if ( methods === void 0 ) methods = {};
 
       var passthrough = {$data:{}, $props:{}, $options:{}, components:{}, computed:{}, methods:{}};
 
       //build new objects by removing keys if already exists (e.g. created by mixins)
       Object.keys($data).forEach(function (e) {if(typeof this$1.$data[e]==="undefined") { passthrough.$data[e] = $data[e]; }} );
       Object.keys($props).forEach(function (e) {if(typeof this$1.$props[e]==="undefined") { passthrough.$props[e] = $props[e]; }} );
-      Object.keys(methods).forEach(function (e) {if(typeof this$1.$options.methods[e]==="undefined") { passthrough.methods[e] = methods[e]; }} );
-      Object.keys(computed).forEach(function (e) {if(typeof this$1.$options.computed[e]==="undefined") { passthrough.computed[e] = computed[e]; }} );
-      Object.keys(components).forEach(function (e) {if(typeof this$1.$options.components[e]==="undefined") { passthrough.components[e] = components[e]; }} );
+      Object.keys(methods).forEach(function (e) {if(this$1.$options.methods && typeof this$1.$options.methods[e]==="undefined") { passthrough.methods[e] = methods[e]; }} );
+      Object.keys(computed).forEach(function (e) {if(this$1.$options.computed && typeof this$1.$options.computed[e]==="undefined") { passthrough.computed[e] = computed[e]; }} );
+      Object.keys(components).forEach(function (e) {if(this$1.$options.components && typeof this$1.$options.components[e]==="undefined") { passthrough.components[e] = components[e]; }} );
 
       var methodKeys = Object.keys(passthrough.methods || {});
       var dataKeys = Object.keys(passthrough.$data || {});
