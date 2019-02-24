@@ -33,5 +33,6 @@
   "homepage": "https://github.com/alexjoverm/v-runtime-template#readme",
   "module": "dist/v-runtime-template.es.js",
   "unpkg": "dist/v-runtime-template.js",
+  "types": "v-runtime-template.d.ts",
   "browser": "dist/v-runtime-template.es.js"
 }
