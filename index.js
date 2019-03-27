@@ -24,7 +24,10 @@ const buildFromProps = (obj, props) => {
 
 export default {
   props: {
-    template: String
+    template: String,
+    created: Function,
+    mounted: Function,
+    destroyed: Function
   },
   render(h) {
     if (this.template) {
@@ -50,6 +53,9 @@ export default {
       const dynamic = {
         template: this.template || "<div></div>",
         props: allKeys,
+        created: this.created || function() {},
+        mounted: this.mounted || function() {},
+        destroyed: this.destroyed || function() {},
         computed: passthrough.computed,
         components: passthrough.components
       };

@@ -104,6 +104,40 @@ export default {
   },
 };
 ```
+## Lifecycle Hooks
+
+You just have to specify the hook directly on the markup  
+
+```html
+<template>
+  <div>
+    <v-runtime-template :template="template" :mounted="templateMounted"></v-runtime-template>
+  </div>
+</template>
+
+<script>
+import VRuntimeTemplate from "v-runtime-template";
+import AppMessage from "./AppMessage";
+
+export default {
+  data: () => ({
+    name: "Mellow",
+    template: `
+      <app-message>Hello {{ name }}!</app-message>
+    `
+  }),
+  components: {
+    AppMessage,
+    VRuntimeTemplate
+  },
+  methods: {
+    templateMounted() {
+      console.log("The component is now mounted");
+    }
+  }
+};
+</script>
+```
 
 ## Limitations
 

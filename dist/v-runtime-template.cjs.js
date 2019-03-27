@@ -31,19 +31,25 @@ var buildFromProps = function (obj, props) {
 
 var index = {
   props: {
-    template: String
+    template: String,
+    created: Function,
+    mounted: Function,
+    destroyed: Function
   },
   render: function render(h) {
     var this$1 = this;
+    this$1.$options.methods = this$1.$options.methods || {};
+    this$1.$options.computed = this$1.$options.computed || {};
+    this$1.$options.components = this$1.$options.components || {};
 
     if (this.template) {
       var ref = this.$parent;
-      var $data = ref.$data;
-      var $props = ref.$props;
+      var $data = ref.$data || {};
+      var $props = ref.$props || {};
       var $options = ref.$options;
-      var components = $options.components;
-      var computed = $options.computed;
-      var methods = $options.methods;
+      var components = $options.components || {};
+      var computed = $options.computed || {};
+      var methods = $options.methods || {};
 
       var passthrough = {$data:{}, $props:{}, $options:{}, components:{}, computed:{}, methods:{}};
 
@@ -64,6 +70,9 @@ var index = {
       var dynamic = {
         template: this.template || "<div></div>",
         props: allKeys,
+        created: this.created || function() {},
+        mounted: this.mounted || function() {},
+        destroyed: this.destroyed || function() {},
         computed: passthrough.computed,
         components: passthrough.components
       };
