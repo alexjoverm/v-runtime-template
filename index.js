@@ -46,12 +46,14 @@ export default {
       const allKeys = dataKeys.concat(propKeys).concat(methodKeys);
       const methodsFromProps = buildFromProps(this.$parent, methodKeys);
       const props = merge([passthrough.$data, passthrough.$props, methodsFromProps]);
+      const provide = this.$parent._provided;
 
       const dynamic = {
         template: this.template || "<div></div>",
         props: allKeys,
         computed: passthrough.computed,
-        components: passthrough.components
+        components: passthrough.components,
+        provide: provide
       };
 
       return h(dynamic, {
