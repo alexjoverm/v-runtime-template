@@ -48,8 +48,8 @@ var index = {
       var passthrough = {$data:{}, $props:{}, $options:{}, components:{}, computed:{}, methods:{}};
 
       //build new objects by removing keys if already exists (e.g. created by mixins)
-      Object.keys($data).forEach(function (e) {if(typeof this$1.$data[e]==="undefined") { passthrough.$data[e] = $data[e]; }} );
-      Object.keys($props).forEach(function (e) {if(typeof this$1.$props[e]==="undefined") { passthrough.$props[e] = $props[e]; }} );
+      Object.keys($data).forEach(function (e) {if(this$1.$data && typeof this$1.$data[e]==="undefined") { passthrough.$data[e] = $data[e]; }} );
+      Object.keys($props).forEach(function (e) {if(this$1.$props && typeof this$1.$props[e]==="undefined") { passthrough.$props[e] = $props[e]; }} );
       Object.keys(methods).forEach(function (e) {if(this$1.$options.methods && typeof this$1.$options.methods[e]==="undefined") { passthrough.methods[e] = methods[e]; }} );
       Object.keys(computed).forEach(function (e) {if(this$1.$options.computed && typeof this$1.$options.computed[e]==="undefined") { passthrough.computed[e] = computed[e]; }} );
       Object.keys(components).forEach(function (e) {if(this$1.$options.components && typeof this$1.$options.components[e]==="undefined") { passthrough.components[e] = components[e]; }} );
