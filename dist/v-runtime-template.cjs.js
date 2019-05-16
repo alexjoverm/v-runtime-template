@@ -38,12 +38,12 @@ var index = {
 
     if (this.template) {
       var ref = this.$parent;
-      var $data = ref.$data;
-      var $props = ref.$props;
-      var $options = ref.$options;
-      var components = $options.components;
-      var computed = $options.computed;
-      var methods = $options.methods;
+      var $data = ref.$data || {};
+      var $props = ref.$props || {};
+      var $options = ref.$options || {};
+      var components = $options.components || {};
+      var computed = $options.computed || {};
+      var methods = $options.methods || {};
 
       var passthrough = {$data:{}, $props:{}, $options:{}, components:{}, computed:{}, methods:{}};
 
