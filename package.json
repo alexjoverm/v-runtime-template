@@ -2,7 +2,7 @@
   "name": "v-runtime-template",
   "version": "1.7.0",
   "description": "Create Vue components by compiling templates on the fly",
-  "main": "dist/v-runtime-template.js",
+  "main": "dist/v-runtime-template.umd.js",
   "scripts": {
     "prepublishOnly": "npm run build",
     "build": "microbundle index.js",
@@ -31,6 +31,6 @@
   },
   "homepage": "https://github.com/alexjoverm/v-runtime-template#readme",
   "module": "dist/v-runtime-template.es.js",
-  "unpkg": "dist/v-runtime-template.js",
+  "unpkg": "dist/v-runtime-template.umd.js",
   "browser": "dist/v-runtime-template.es.js"
 }
