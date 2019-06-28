@@ -1,11 +1,11 @@
 {
   "name": "v-runtime-template",
-  "version": "1.6.2",
+  "version": "1.9.0",
   "description": "Create Vue components by compiling templates on the fly",
-  "main": "dist/v-runtime-template.cjs.js",
+  "main": "dist/v-runtime-template.umd.js",
   "scripts": {
     "prepublishOnly": "npm run build",
-    "build": "rollit index.js",
+    "build": "microbundle index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,14 +24,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "hoek": "^5.0.3",
-    "rollit": "0.0.8"
+    "microbundle": "^0.11.0"
   },
   "bugs": {
     "url": "https://github.com/alexjoverm/v-runtime-template/issues"
   },
   "homepage": "https://github.com/alexjoverm/v-runtime-template#readme",
   "module": "dist/v-runtime-template.es.js",
-  "unpkg": "dist/v-runtime-template.js",
-  "browser": "dist/v-runtime-template.es.js"
+  "unpkg": "dist/v-runtime-template.umd.js",
+  "browser": "dist/v-runtime-template.es.js",
+  "types": "v-runtime-template.d.ts"
 }
