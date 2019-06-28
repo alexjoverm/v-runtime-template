@@ -2,10 +2,10 @@
   "name": "v-runtime-template",
   "version": "1.7.0",
   "description": "Create Vue components by compiling templates on the fly",
-  "main": "dist/v-runtime-template.cjs.js",
+  "main": "dist/v-runtime-template.js",
   "scripts": {
     "prepublishOnly": "npm run build",
-    "build": "rollit index.js",
+    "build": "microbundle index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,8 +24,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "hoek": "^5.0.3",
-    "rollit": "0.0.8"
+    "microbundle": "^0.11.0"
   },
   "bugs": {
     "url": "https://github.com/alexjoverm/v-runtime-template/issues"
