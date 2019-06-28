@@ -32,6 +32,10 @@ export default {
       const { components = {}, computed = {}, methods = {} } = $options;
 
       let passthrough = {$data:{}, $props:{}, $options:{}, components:{}, computed:{}, methods:{}};
+      this.$options = this.$options || {}
+      this.$options.methods = this.$options.methods || {}
+      this.$options.computed = this.$options.computed || {}
+      this.$options.components = this.$options.computed || {}
 
       //build new objects by removing keys if already exists (e.g. created by mixins)
       Object.keys($data).forEach(e => {if(typeof this.$data[e]==="undefined") passthrough.$data[e] = $data[e];} );
@@ -40,7 +44,7 @@ export default {
       Object.keys(computed).forEach(e => {if(typeof this.$options.computed[e]==="undefined") passthrough.computed[e] = computed[e];} );
       Object.keys(components).forEach(e => {if(typeof this.$options.components[e]==="undefined") passthrough.components[e] = components[e];} );
 
-      const methodKeys = Object.keys(passthrough.methods || {});
+      const methodKeys = Object.keys(passthrough.methods || [])
       const dataKeys = Object.keys(passthrough.$data || {});
       const propKeys = Object.keys(passthrough.$props || {});
       const allKeys = dataKeys.concat(propKeys).concat(methodKeys);
