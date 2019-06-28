@@ -97,7 +97,8 @@ export default {
         template: this.template || "<div></div>",
         props: allKeys,
         computed: passthrough.computed,
-        components: passthrough.components
+        components: passthrough.components,
+        provide: provide
       };
 
       return h(dynamic, { props: finalProps });
