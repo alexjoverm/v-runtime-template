@@ -24,15 +24,17 @@ const buildFromProps = (obj, props) => {
 
 export default {
   props: {
-    template: String
+    template: String,
+    parent: Object
   },
   render(h) {
     if (this.template) {
+      const parent = this.parent || this.$parent
       const {
         $data: parentData = {},
         $props: parentProps = {},
         $options: parentOptions = {}
-      } = this.$parent;
+      } = parent;
       const {
         components: parentComponents = {},
         computed: parentComputed = {},
@@ -78,7 +80,7 @@ export default {
       const dataKeys = Object.keys(passthrough.$data || {});
       const propKeys = Object.keys(passthrough.$props || {});
       const allKeys = dataKeys.concat(propKeys).concat(methodKeys);
-      const methodsFromProps = buildFromProps(this.$parent, methodKeys);
+      const methodsFromProps = buildFromProps(parent, methodKeys);
       const finalProps = merge([
         passthrough.$data,
         passthrough.$props,
