@@ -92,6 +92,7 @@ export default {
         methodsFromProps,
         this.templateProps
       ]);
+      const provide = this.$parent._provided;
 
       const dynamic = {
         template: this.template || "<div></div>",
