@@ -25,7 +25,11 @@ const buildFromProps = (obj, props) => {
 export default {
   props: {
     template: String,
-    parent: Object
+    parent: Object,
+    templateProps: {
+      type: Object,
+      default: () => ({})
+    }
   },
   render(h) {
     if (this.template) {
@@ -76,15 +80,17 @@ export default {
           passthrough.components[e] = parentComponents[e];
       });
 
-      const methodKeys = Object.keys(passthrough.methods || []);
+      const methodKeys = Object.keys(passthrough.methods || {});
       const dataKeys = Object.keys(passthrough.$data || {});
       const propKeys = Object.keys(passthrough.$props || {});
-      const allKeys = dataKeys.concat(propKeys).concat(methodKeys);
+      const templatePropKeys = Object.keys(this.templateProps);
+      const allKeys = dataKeys.concat(propKeys).concat(methodKeys).concat(templatePropKeys);
       const methodsFromProps = buildFromProps(parent, methodKeys);
       const finalProps = merge([
         passthrough.$data,
         passthrough.$props,
-        methodsFromProps
+        methodsFromProps,
+        this.templateProps
       ]);
 
       const dynamic = {
