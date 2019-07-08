@@ -1,6 +1,8 @@
 # v-runtime-template
 
 [![npm](https://img.shields.io/npm/v/v-runtime-template.svg)](https://www.npmjs.com/package/v-runtime-template)
+[![npm](https://img.shields.io/npm/dm/v-runtime-template.svg)](https://www.npmjs.com/package/v-runtime-template)
+[![Donate](https://img.shields.io/badge/donate-paypal-blue.svg)](https://paypal.me/AJoverMorales)
 
 A Vue.js components that makes easy compiling and interpreting a Vue.js template at runtime by using a `v-html` like API.
 
