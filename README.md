@@ -153,6 +153,13 @@ export default {
     `
 ```
 
+**Example with ```template-props``` :**
+
+In case you would like to pass the props (received from parent component or scoped slots) then you can pass it to ```template-props```. By default v-runtime-template only looks into the reactive data properties registered inside your data( ) hook. 
+```html
+<v-runtime-template :template="template" :template-props="{props}"></v-runtime-template>
+```
+
 ### v-runtime-template VS dynamic components (`<component>`)
 
 Dynamic components have somewhat different goal: to render a component dynamically by binding it to the `is` prop. Although, these components are usually pre-compiled. However, the goal of v-runtime-template can be achieved just by using the component options object form of dynamic components.
