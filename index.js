@@ -1,3 +1,5 @@
+import {h} from 'vue';
+
 const defineDescriptor = (src, dest, name) => {
   if (!dest.hasOwnProperty(name)) {
     const descriptor = Object.getOwnPropertyDescriptor(src, name);
@@ -31,7 +33,7 @@ export default {
       default: () => ({})
     }
   },
-  render(h) {
+  render() {
     if (this.template) {
       const parent = this.parent || this.$parent
       const {
@@ -92,7 +94,7 @@ export default {
         methodsFromProps,
         this.templateProps
       ]);
-      const provide = this.$parent._provided;
+      const provide = this.$parent.provides;
 
       const dynamic = {
         template: this.template || "<div></div>",
@@ -101,8 +103,9 @@ export default {
         components: passthrough.components,
         provide: provide
       };
-
-      return h(dynamic, { props: finalProps });
+const render = h(dynamic, { props: finalProps })
+      console.log(render);
+      return render;
     }
   }
 };
