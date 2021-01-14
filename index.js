@@ -1,18 +1,19 @@
 import {h} from 'vue';
 
 const defineDescriptor = (src, dest, name) => {
+  // eslint-disable-next-line no-prototype-builtins
   if (!dest.hasOwnProperty(name)) {
     const descriptor = Object.getOwnPropertyDescriptor(src, name);
     Object.defineProperty(dest, name, descriptor);
   }
 };
 
-const merge = objs => {
+const merge = (objs) => {
   const res = {};
-  objs.forEach(obj => {
+  objs.forEach((obj) => {
     obj &&
-      Object.getOwnPropertyNames(obj).forEach(name =>
-        defineDescriptor(obj, res, name)
+      Object.getOwnPropertyNames(obj).forEach((name) =>
+        defineDescriptor(obj, res, name),
       );
   });
   return res;
@@ -20,7 +21,7 @@ const merge = objs => {
 
 const buildFromProps = (obj, props) => {
   const res = {};
-  props.forEach(prop => defineDescriptor(obj, res, prop));
+  props.forEach((prop) => defineDescriptor(obj, res, prop));
   return res;
 };
 
@@ -30,26 +31,26 @@ export default {
     parent: Object,
     templateProps: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   render() {
     if (this.template) {
-      const parent = this.parent || this.$parent
+      const parent = this.parent || this.$parent;
       const {
         $data: parentData = {},
         $props: parentProps = {},
-        $options: parentOptions = {}
+        $options: parentOptions = {},
       } = parent;
       const {
         components: parentComponents = {},
         computed: parentComputed = {},
-        methods: parentMethods = {}
+        methods: parentMethods = {},
       } = parentOptions;
       const {
         $data = {},
         $props = {},
-        $options: { methods = {}, computed = {}, components = {} } = {}
+        $options: {methods = {}, computed = {}, components = {}} = {},
       } = this;
       const passthrough = {
         $data: {},
@@ -57,29 +58,34 @@ export default {
         $options: {},
         components: {},
         computed: {},
-        methods: {}
+        methods: {},
       };
 
-      //build new objects by removing keys if already exists (e.g. created by mixins)
-      Object.keys(parentData).forEach(e => {
-        if (typeof $data[e] === "undefined")
+      // build new objects by removing keys if already exists (e.g. created by mixins)
+      Object.keys(parentData).forEach((e) => {
+        if (typeof $data[e] === 'undefined') {
           passthrough.$data[e] = parentData[e];
+        }
       });
-      Object.keys(parentProps).forEach(e => {
-        if (typeof $props[e] === "undefined")
+      Object.keys(parentProps).forEach((e) => {
+        if (typeof $props[e] === 'undefined') {
           passthrough.$props[e] = parentProps[e];
+        }
       });
-      Object.keys(parentMethods).forEach(e => {
-        if (typeof methods[e] === "undefined")
+      Object.keys(parentMethods).forEach((e) => {
+        if (typeof methods[e] === 'undefined') {
           passthrough.methods[e] = parentMethods[e];
+        }
       });
-      Object.keys(parentComputed).forEach(e => {
-        if (typeof computed[e] === "undefined")
+      Object.keys(parentComputed).forEach((e) => {
+        if (typeof computed[e] === 'undefined') {
           passthrough.computed[e] = parentComputed[e];
+        }
       });
-      Object.keys(parentComponents).forEach(e => {
-        if (typeof components[e] === "undefined")
+      Object.keys(parentComponents).forEach((e) => {
+        if (typeof components[e] === 'undefined') {
           passthrough.components[e] = parentComponents[e];
+        }
       });
 
       const methodKeys = Object.keys(passthrough.methods || {});
@@ -92,20 +98,21 @@ export default {
         passthrough.$data,
         passthrough.$props,
         methodsFromProps,
-        this.templateProps
+        this.templateProps,
       ]);
-      const provide = this.$parent.provides;
+
+      const provide = this.$parent.$.provides ? this.$parent.$.provides : {}; // Avoids Vue warning
 
       const dynamic = {
-        template: this.template || "<div></div>",
+        template: this.template || '<div></div>',
         props: allKeys,
         computed: passthrough.computed,
         components: passthrough.components,
-        provide: provide
+        provide: provide,
       };
-const render = h(dynamic, { props: finalProps })
-      console.log(render);
-      return render;
+      // debugger;
+
+      return h(dynamic, {...finalProps});
     }
-  }
+  },
 };
