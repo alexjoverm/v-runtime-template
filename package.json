@@ -1,8 +1,8 @@
 {
-  "name": "v-runtime-template-vue3",
-  "version": "1.0.4",
+  "name": "v3-runtime-template",
+  "version": "1.0.0",
   "description": "Create Vue 3 components by compiling templates on the fly",
-  "main": "dist/v-runtime-template.umd.js",
+  "main": "dist/v3-runtime-template.umd.js",
   "scripts": {
     "prepublishOnly": "npm run build",
     "build": "microbundle index.js",
@@ -10,10 +10,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mattelen/v-runtime-template-vue3.git"
+    "url": "git+https://github.com/mattelen/v3-runtime-template.git"
   },
   "keywords": [
     "vuejs",
+    "vue3",
     "dynamic",
     "runtime",
     "template"
@@ -22,20 +23,26 @@
     "name": "Alex J",
     "email": "alexjovermorales@gmail.com"
   },
+  "contributors": [
+    {
+      "name": "Matt Elen",
+      "url": "https://github.com/mattelen"
+    }
+  ],
   "license": "MIT",
   "devDependencies": {
     "acorn": "^8.0.4",
     "microbundle": "^0.11.0"
   },
   "bugs": {
-    "url": "https://github.com/mattelen/v-runtime-template-vue3/issues"
+    "url": "https://github.com/mattelen/v3-runtime-template/issues"
   },
-  "homepage": "https://github.com/mattelen/v-runtime-template-vue3#readme",
-  "module": "dist/v-runtime-template.es.js",
-  "unpkg": "dist/v-runtime-template.umd.js",
-  "browser": "dist/v-runtime-template.es.js",
-  "types": "v-runtime-template.d.ts",
+  "homepage": "https://github.com/mattelen/v3-runtime-template#readme",
+  "module": "dist/v3-runtime-template.es.js",
+  "unpkg": "dist/v3-runtime-template.umd.js",
+  "browser": "dist/v3-runtime-template.es.js",
+  "types": "v3-runtime-template.d.ts",
   "dependencies": {
-    "vue": "^3.0.5"
+    "vue": "^3.0.0"
   }
 }

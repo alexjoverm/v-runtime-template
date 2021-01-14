@@ -1,20 +1,20 @@
-# v-runtime-template
+# v-runtime-template-vue3
 
-[![npm](https://img.shields.io/npm/v/v-runtime-template.svg)](https://www.npmjs.com/package/v-runtime-template)
-[![npm](https://img.shields.io/npm/dm/v-runtime-template.svg)](https://www.npmjs.com/package/v-runtime-template)
-[![Donate](https://img.shields.io/badge/donate-paypal-blue.svg)](https://paypal.me/AJoverMorales)
+[comment]: <> ([![npm]&#40;https://img.shields.io/npm/v/v-runtime-template-vue3.svg&#41;]&#40;https://www.npmjs.com/package/v-runtime-template-vue3&#41;)
+
+[comment]: <> ([![npm]&#40;https://img.shields.io/npm/dm/v-runtime-template-vue3.svg&#41;]&#40;https://www.npmjs.com/package/v-runtime-template-vue3&#41;)
+
+[comment]: <> ([![Donate]&#40;https://img.shields.io/badge/donate-paypal-blue.svg&#41;]&#40;https://paypal.me/AJoverMorales&#41;)
 
 A Vue.js components that makes easy compiling and interpreting a Vue.js template at runtime by using a `v-html` like API.
 
-> Do you know **[VueDose](https://vuedose.tips)**? It's where you can learn tips about the Vue.js ecosystem in a concise format, perfect for busy devs! 🦄
-
-*[See Demo on CodeSandbox](https://codesandbox.io/s/884v9kq790)*
+v-runtime-template-vue3 is based off v-runtime-template but tweaked to work with Vue 3.
 
 ## Motivation
 
 This library solves the case where you get a vue-syntax template string on runtime, usually from a server. Think of a feature where you allow the user to create their own interfaces and structures. You save that as a vue template in your database, which your UI will request later. While components are pre-compiled at build time, this case isn't (since the template is received at runtime) and needs to be compiled at runtime.
 
-v-runtime-template compiles that template and attaches it to the scope of the component that uses it, so it has access to its data, props, methods and computed properties.
+v-runtime-template-vue3 compiles that template and attaches it to the scope of the component that uses it, so it has access to its data, props, methods and computed properties.
 
 Think of it as the `v-html` equivalent that also understands vue template syntax (while `v-html` is just for plain HTML).
 
@@ -23,18 +23,21 @@ Think of it as the `v-html` equivalent that also understands vue template syntax
 Install it:
 
 ```
-npm install v-runtime-template
+npm install v-runtime-template-vue3
 ```
 
-You must **use the with-compiler Vue.js version**. This is needed in order to compile on-the-fly Vue.js templates. For that, you can set a webpack alias for `vue` to the `vue/dist/vue.common` file.
+You must **use the with-compiler Vue.js version**. This is needed in order to compile on-the-fly Vue.js templates. For that, you can set a webpack alias for `vue` to the correct file.
 
 For example, if you use the [Vue CLI](https://github.com/vuejs/vue-cli), create or modify the `vue.config.js` file adding the following alias:
 
 ```js
 // vue.config.js
 module.exports = {
-  runtimeCompiler: true
-};
+    configureWebpack: {
+      resolve: {
+        alias: {
+          vue$: 'vue/dist/vue.esm-bundler.js',
+      // ...
 ```
 
 And in [Nuxt](http://nuxtjs.org/), open the `nuxt.config.js` file and extend the webpack config by adding the following line to the `extend` key:
@@ -44,13 +47,13 @@ And in [Nuxt](http://nuxtjs.org/), open the `nuxt.config.js` file and extend the
 {
   build: {
     extend(config, { isDev, isClient }) {
-      config.resolve.alias["vue"] = "vue/dist/vue.common";
+      config.resolve.alias["vue"] = "vue.esm-bundler.js";
       // ...
 ```
-
+You can read about different bundles of Vue in the official [help guides](https://v3.vuejs.org/guide/installation.html#with-a-bundler).
 ## Usage
 
-You just need to import the `v-runtime-template` component, and pass the template you want:
+You just need to import the `v-runtime-template-vue3` component, and pass the template you want:
 
 ```html
 <template>
@@ -60,7 +63,7 @@ You just need to import the `v-runtime-template` component, and pass the templat
 </template>
 
 <script>
-import VRuntimeTemplate from "v-runtime-template";
+import VRuntimeTemplate from "v-runtime-template-vue3";
 import AppMessage from "./AppMessage";
 
 export default {
@@ -109,11 +112,11 @@ export default {
 
 ## Limitations
 
-Keep in mind that the template can only access the instance properties of the component who is using it. Read [this issue](https://github.com/alexjoverm/v-runtime-template/issues/9) for more information.
+Keep in mind that the template can only access the instance properties of the component who is using it.
 
 ## Comparison
 
-### v-runtime-template VS v-html
+### v-runtime-template-vue3 VS v-html
 
 _TL;DR: If you need to interpret only HTML, use `v-html`. Use this library otherwise._
 
@@ -138,11 +141,11 @@ the following wouldn't since it uses the custom `router-link` component:
 <router-link to="mike-page">Go to Mike page</router-link>
 ```
 
-But you can use v-runtime-template, which uses basically the same API than v-html:
+But you can use v-runtime-template-vue3, which uses basically the same API than v-html:
 
 ```html
 <template>
-	<v-runtime-template :template="template"></v-runtime-template>
+	<v-runtime-template-vue3 :template="template"></v-runtime-template-vue3>
 </template>
 
 <script>
@@ -153,8 +156,8 @@ export default {
     `
 ```
 
-### v-runtime-template VS dynamic components (`<component>`)
+### v-runtime-template-vue3 VS dynamic components (`<component>`)
 
-Dynamic components have somewhat different goal: to render a component dynamically by binding it to the `is` prop. Although, these components are usually pre-compiled. However, the goal of v-runtime-template can be achieved just by using the component options object form of dynamic components.
+Dynamic components have somewhat different goal: to render a component dynamically by binding it to the `is` prop. Although, these components are usually pre-compiled. However, the goal of v-runtime-template-vue3 can be achieved just by using the component options object form of dynamic components.
 
-In fact, v-runtime-template uses that under the hood (in the render function form) along with other common tasks to achieve its goal.
+In fact, v-runtime-template-vue3 uses that under the hood (in the render function form) along with other common tasks to achieve its goal.
