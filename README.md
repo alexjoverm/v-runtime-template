@@ -1,20 +1,18 @@
-# v-runtime-template-vue3
+# vue3-runtime-template
 
-[comment]: <> ([![npm]&#40;https://img.shields.io/npm/v/v-runtime-template-vue3.svg&#41;]&#40;https://www.npmjs.com/package/v-runtime-template-vue3&#41;)
+[![npm](https://img.shields.io/npm/v/vue3-runtime-template.svg)](https://www.npmjs.com/package/vue3-runtime-template)
 
-[comment]: <> ([![npm]&#40;https://img.shields.io/npm/dm/v-runtime-template-vue3.svg&#41;]&#40;https://www.npmjs.com/package/v-runtime-template-vue3&#41;)
-
-[comment]: <> ([![Donate]&#40;https://img.shields.io/badge/donate-paypal-blue.svg&#41;]&#40;https://paypal.me/AJoverMorales&#41;)
+[![npm](https://img.shields.io/npm/dm/vue3-runtime-template.svg)](https://www.npmjs.com/package/vue3-runtime-template)
 
 A Vue.js components that makes easy compiling and interpreting a Vue.js template at runtime by using a `v-html` like API.
 
-v-runtime-template-vue3 is based off v-runtime-template but tweaked to work with Vue 3.
+vue3-runtime-template is based off v-runtime-template but tweaked to work with Vue 3.
 
 ## Motivation
 
 This library solves the case where you get a vue-syntax template string on runtime, usually from a server. Think of a feature where you allow the user to create their own interfaces and structures. You save that as a vue template in your database, which your UI will request later. While components are pre-compiled at build time, this case isn't (since the template is received at runtime) and needs to be compiled at runtime.
 
-v-runtime-template-vue3 compiles that template and attaches it to the scope of the component that uses it, so it has access to its data, props, methods and computed properties.
+vue3-runtime-template compiles that template and attaches it to the scope of the component that uses it, so it has access to its data, props, methods and computed properties.
 
 Think of it as the `v-html` equivalent that also understands vue template syntax (while `v-html` is just for plain HTML).
 
@@ -23,7 +21,7 @@ Think of it as the `v-html` equivalent that also understands vue template syntax
 Install it:
 
 ```
-npm install v-runtime-template-vue3
+npm install vue3-runtime-template
 ```
 
 You must **use the with-compiler Vue.js version**. This is needed in order to compile on-the-fly Vue.js templates. For that, you can set a webpack alias for `vue` to the correct file.
@@ -53,7 +51,7 @@ And in [Nuxt](http://nuxtjs.org/), open the `nuxt.config.js` file and extend the
 You can read about different bundles of Vue in the official [help guides](https://v3.vuejs.org/guide/installation.html#with-a-bundler).
 ## Usage
 
-You just need to import the `v-runtime-template-vue3` component, and pass the template you want:
+You just need to import the `vue3-runtime-template` component, and pass the template you want:
 
 ```html
 <template>
@@ -63,7 +61,7 @@ You just need to import the `v-runtime-template-vue3` component, and pass the te
 </template>
 
 <script>
-import VRuntimeTemplate from "v-runtime-template-vue3";
+import VRuntimeTemplate from "vue3-runtime-template";
 import AppMessage from "./AppMessage";
 
 export default {
@@ -116,7 +114,7 @@ Keep in mind that the template can only access the instance properties of the co
 
 ## Comparison
 
-### v-runtime-template-vue3 VS v-html
+### vue3-runtime-template VS v-html
 
 _TL;DR: If you need to interpret only HTML, use `v-html`. Use this library otherwise._
 
@@ -141,11 +139,11 @@ the following wouldn't since it uses the custom `router-link` component:
 <router-link to="mike-page">Go to Mike page</router-link>
 ```
 
-But you can use v-runtime-template-vue3, which uses basically the same API than v-html:
+But you can use vue3-runtime-template, which uses basically the same API than v-html:
 
 ```html
 <template>
-	<v-runtime-template-vue3 :template="template"></v-runtime-template-vue3>
+	<vue3-runtime-template :template="template"></vue3-runtime-template>
 </template>
 
 <script>
@@ -156,8 +154,8 @@ export default {
     `
 ```
 
-### v-runtime-template-vue3 VS dynamic components (`<component>`)
+### vue3-runtime-template VS dynamic components (`<component>`)
 
-Dynamic components have somewhat different goal: to render a component dynamically by binding it to the `is` prop. Although, these components are usually pre-compiled. However, the goal of v-runtime-template-vue3 can be achieved just by using the component options object form of dynamic components.
+Dynamic components have somewhat different goal: to render a component dynamically by binding it to the `is` prop. Although, these components are usually pre-compiled. However, the goal of vue3-runtime-template can be achieved just by using the component options object form of dynamic components.
 
-In fact, v-runtime-template-vue3 uses that under the hood (in the render function form) along with other common tasks to achieve its goal.
+In fact, vue3-runtime-template uses that under the hood (in the render function form) along with other common tasks to achieve its goal.

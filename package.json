@@ -1,8 +1,8 @@
 {
-  "name": "v3-runtime-template",
-  "version": "1.0.0",
+  "name": "vue3-runtime-template",
+  "version": "1.0.1",
   "description": "Create Vue 3 components by compiling templates on the fly",
-  "main": "dist/v3-runtime-template.umd.js",
+  "main": "dist/vue3-runtime-template.umd.js",
   "scripts": {
     "prepublishOnly": "npm run build",
     "build": "microbundle index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mattelen/v3-runtime-template.git"
+    "url": "git+https://github.com/mattelen/vue3-runtime-template.git"
   },
   "keywords": [
     "vuejs",
@@ -35,13 +35,13 @@
     "microbundle": "^0.11.0"
   },
   "bugs": {
-    "url": "https://github.com/mattelen/v3-runtime-template/issues"
+    "url": "https://github.com/mattelen/vue3-runtime-template/issues"
   },
-  "homepage": "https://github.com/mattelen/v3-runtime-template#readme",
-  "module": "dist/v3-runtime-template.es.js",
-  "unpkg": "dist/v3-runtime-template.umd.js",
-  "browser": "dist/v3-runtime-template.es.js",
-  "types": "v3-runtime-template.d.ts",
+  "homepage": "https://github.com/mattelen/vue3-runtime-template#readme",
+  "module": "dist/vue3-runtime-template.es.js",
+  "unpkg": "dist/vue3-runtime-template.umd.js",
+  "browser": "dist/vue3-runtime-template.es.js",
+  "types": "vue3-runtime-template.d.ts",
   "dependencies": {
     "vue": "^3.0.0"
   }
