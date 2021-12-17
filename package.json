@@ -1,6 +1,6 @@
 {
   "name": "vue3-runtime-template",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Create Vue 3 components by compiling templates on the fly",
   "main": "dist/vue3-runtime-template.umd.js",
   "scripts": {
