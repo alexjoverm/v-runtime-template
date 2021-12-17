@@ -38,7 +38,7 @@ module.exports = {
       // ...
 ```
 
-And in [Nuxt](http://nuxtjs.org/), open the `nuxt.config.js` file and extend the webpack config by adding the following line to the `extend` key:
+In [Nuxt v2](http://nuxtjs.org/), open the `nuxt.config.js` file and extend the webpack config by adding the following line to the `extend` key:
 
 ```js
 // nuxt.config.js
@@ -48,6 +48,25 @@ And in [Nuxt](http://nuxtjs.org/), open the `nuxt.config.js` file and extend the
       config.resolve.alias["vue"] = "vue.esm-bundler.js";
       // ...
 ```
+
+In [Nuxt v3](https://v3.nuxtjs.org/), open the `nuxt.config.js` file and extend the vite config by adding the following hook, just on client:
+
+```js
+// nuxt.config.js
+{
+ (...)
+
+ hooks: {
+      'vite:extendConfig': (config, { isClient, isServer }) => {
+        if (isClient) {
+          config.resolve.alias.vue = 'vue/dist/vue.esm-bundler'
+        }
+      },
+    },
+
+  (...)
+```
+
 You can read about different bundles of Vue in the official [help guides](https://v3.vuejs.org/guide/installation.html#with-a-bundler).
 ## Usage
 
