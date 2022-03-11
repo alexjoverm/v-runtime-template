@@ -32,7 +32,8 @@ export default {
     templateProps: {
       type: Object,
       default: () => ({}),
-    },
+	},
+	ready: Function,
   },
   render() {
     if (this.template) {
@@ -109,6 +110,9 @@ export default {
         computed: passthrough.computed,
         components: passthrough.components,
         provide: provide,
+		  mounted: () => {
+			  if (this.ready) this.ready()
+		  },
       };
       // debugger;
 
