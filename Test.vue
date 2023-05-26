@@ -1,7 +1,7 @@
 <template>
   <div>
     <slot></slot>
-    <hr>
+    <hr />
   </div>
 </template>
 
@@ -9,5 +9,4 @@
 export default {};
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
