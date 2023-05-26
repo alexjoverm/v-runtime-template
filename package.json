@@ -31,8 +31,8 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "acorn": "^8.0.4",
-    "microbundle": "^0.11.0"
+    "acorn": "^8.8.2",
+    "microbundle": "^0.15.1"
   },
   "bugs": {
     "url": "https://github.com/mattelen/vue3-runtime-template/issues"
