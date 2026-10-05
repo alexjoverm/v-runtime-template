@@ -6,7 +6,7 @@
 
 A Vue.js components that makes easy compiling and interpreting a Vue.js template at runtime by using a `v-html` like API.
 
-> Do you know **[VueDose](https://vuedose.tips)**? It's where you can learn tips about the Vue.js ecosystem in a concise format, perfect for busy devs! 🦄
+> Do you know **[VueDose](https://vuedose.dev)**? It's where you can learn tips about the Vue.js ecosystem in a concise format, perfect for busy devs! 🦄
 
 *[See Demo on CodeSandbox](https://codesandbox.io/s/884v9kq790)*
 
